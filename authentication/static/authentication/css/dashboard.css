@@ -1,0 +1,19 @@
+.count-box {
+    padding: 20px;
+    margin-bottom: 50px;
+    border-style: solid;
+    border-color: #343a4052;
+    border-width: 2px;
+}
+
+.count-no {
+    font-weight: bold;
+    font-size: 30px;
+    color: #a7701e;
+}
+
+.count-desp {
+    font-weight: bold;
+    font-size: 20px;
+    color: #367c88;
+}

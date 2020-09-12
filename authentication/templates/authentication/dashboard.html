@@ -1,0 +1,57 @@
+{% extends 'authentication/base.html' %}
+
+{% block title %} Dashboard {% endblock %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block extra_css %}
+    <link rel='stylesheet' href='{% static "authentication/css/dashboard.css" %}'>
+    <script type="text/javascript" src="{% static 'ui/js/fusioncharts.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class='container'>
+        <div class='row'>
+            <div class='col-md-3 count-box count-box-unknown'>
+                <div class='col-md-12'>
+                    <div class='row count-no'>{{ total_cam }}</div> 
+                    <div class='row count-desp'>Camera Added</div>
+                </div>
+            </div>
+            <div class='col-md-3 count-box count-box-known'>
+                <div class='col-md-12'>
+                    <div class='row count-no'>{{ total_emp }}</div> 
+                    <div class='row count-desp'>Total Employees</div>
+                </div>
+            </div>
+            <div class='col-md-3 count-box count-box-known'>
+                <div class='col-md-12'>
+                    <div class='row count-no'>{{ total_known }}</div> 
+                    <div class='row count-desp'>Employees Recognized</div>
+                </div>
+            </div>
+            <div class='col-md-3 count-box count-box-unknown'>
+                <div class='col-md-12'>
+                    <div class='row count-no'>{{ total_unknown }}</div> 
+                    <div class='row count-desp'>Visitors</div>
+                </div>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-4'>
+                <div class='col-md-12' id='chart-2'></div>
+            </div>
+            <div class='col-md-8'>
+                <a href='{% url "list_employee" %}'><div class='col-md-12' id='chart-1'></div></a>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-8'>
+                {{ emp_chart|safe }}
+            </div>
+            <div class='col-md-4'>
+                {{ emp_pie|safe }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

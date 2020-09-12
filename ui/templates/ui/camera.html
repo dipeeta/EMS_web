@@ -1,0 +1,81 @@
+{% extends 'authentication/base.html' %}
+{% load bootstrap4 %}
+{% load fontawesome_5 %}
+{% load static %}
+{% bootstrap_messages %}
+
+
+{% block title %} Camera {% endblock %}
+
+{% block extra_css %}
+    <link rel='stylesheet' href='{% static "ui/css/forms.css" %}'>
+    <link rel='stylesheet' href='{% static "ui/css/list.css" %}'>
+    {% fontawesome_5_static %}
+{% endblock %}
+
+{% block content %}
+    <div class='row'>
+        <div class = 'col-md-8 offset-md-2'>
+            <div class='row main-form'
+                <div class='row'>
+                    <form method='POST' class='form col-md-12'>
+                        {% csrf_token %}
+                        <div class='row'>
+                            <div class='col-md-3'>
+                                {% bootstrap_field form.name show_label=False %}
+                            </div>
+                            <div class='col-md-3'>
+                                {% bootstrap_field form.url show_label=False %}
+                            </div>
+                            <div class='col-md-3'>
+                                {% bootstrap_field form.category show_label=False %}
+                            </div>
+                            <div class='col-md-3'>
+                                {% buttons %}
+                                    <button type='submit' class='btn btn-dark btn-block col-md-6 offset-md-3'>Submit</button>
+                                {% endbuttons %}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-md-8 offset-md-2'>
+            <div class='list-heading'>
+                Camera Details
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-md-8 offset-md-2'>
+            <div class='table-responsive'>
+                <table class='table table-striped'>
+                    <thead>
+                        <tr>
+                            <th scope='col'>Status</th>
+                            <th scope='col'>Name</th>
+                            <th scope='col'>Url</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for camera in cameras %}
+                            <tr>
+                                <td>
+                                    <a href='{% url "toggle_status" camera.id %}'>
+                                        {% if camera.status %}
+                                            {% fa5_icon 'check' %}
+                                        {% else %}
+                                            {% fa5_icon 'times' %}
+                                        {% endif %}
+                                    </a>
+                                </td>
+                                <td>{{ camera.name }}</td>
+                                <td>{{ camera.url }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+{% endblock %}

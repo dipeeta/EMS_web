@@ -1,0 +1,37 @@
+{% extends 'authentication/base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% bootstrap_messages %}
+
+
+{% block title %} Add Employee {% endblock %}
+
+{% block extra_css %}
+    <link rel='stylesheet' href='{% static "ui/css/forms.css" %}'>
+{% endblock %}
+
+{% block content %}
+    <div class='row'>
+        <div class = 'col-md-4 offset-md-4'>
+            <div class='row form-heading'>
+                <div class=''>
+                    Add New Employee Details
+                </div>
+            </div>
+            <div class='row main-form'>
+                <div class=''>
+                    <form method='POST' class='form'>
+                        {% csrf_token %}
+                        {% bootstrap_field form.emp_id show_label=False %}
+                        {% bootstrap_field form.name show_label=False %}
+                        {% bootstrap_field form.email show_label=False %}
+                        {% bootstrap_field form.address show_label=False %}
+                        {% buttons %}
+                            <button type='submit' class='btn btn-dark btn-block col-md-6 offset-md-3'>Submit</button>
+                        {% endbuttons %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

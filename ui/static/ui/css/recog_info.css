@@ -1,0 +1,22 @@
+.emp-name {
+    font-weight: bold;
+    font-size: 30px;
+    color: brown;
+    padding-top: 20px;
+}
+
+.emp-email {
+    font-family: cursive;
+    font-weight: bold;
+}
+
+/* .info-grid {
+    border-style: dotted;
+    border-width: 0px 1px 0px 0px;
+    margin-right: 40px;
+    border-color: gray;
+} */
+
+.table {
+    margin-top: 50px;
+}

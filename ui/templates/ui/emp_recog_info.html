@@ -1,0 +1,54 @@
+{% extends 'authentication/base.html' %}
+
+{% block title %} Employee Recognition Info {% endblock %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block extra_css %}
+    <link rel='stylesheet' href='{% static "ui/css/recog_info.css" %}'>
+{% endblock %}
+
+{% block content %}
+    <div class='row'>
+        {% for key1, value1 in emp_recog.items %}
+            <div class='row col-md-12'>
+                {% for key, value in value1.items %}
+                    {% if key == 'employee' %}
+                        <div class='row col-md-12 info-grid'>
+                            <div class='row col-md-4 offset-md-4'>
+                                <div class='col-md-6'><img src='../../../media/{{ image.image }}' class='rounded-circle' height='150px' width='80%'></div>
+                                <div class='col-md-5'>
+                                    <div class='row emp-name'>{{ value.name }}</div>
+                                    <div class='row emp-email'>{{ value.email }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    {% elif key == 'time_spend' %}
+                        <div class='row col-md-12'>
+                            <div class='col-md-8 offset-md-2'>
+                                <table class='table'>
+                                    <thead>
+                                        <tr>
+                                            <th>Check In</th>
+                                            <th>Check Out</th>
+                                            <th>Duration (seconds)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for record in value %}
+                                        <tr>
+                                            {% for key2, value2 in record.items %}
+                                                <td>{{ value2 }}</td>
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

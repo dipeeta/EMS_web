@@ -1,0 +1,55 @@
+{% extends 'authentication/base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% bootstrap_messages %}
+
+
+{% block title %} Employee Images {% endblock %}
+
+{% block extra_css %}
+    <link rel='stylesheet' href='{% static "ui/css/forms.css" %}'>
+{% endblock %}
+
+{% block content %}
+    <div class='row'>
+        <div class='col-md-6 offset-md-1'>
+            <div class='row'>
+                {% for image in images %}
+                    <div class='col-md-4'>
+                        <div class='thumbnail'>
+                            <img src='../../media/{{ image.image }}' class='rounded' height='150px' width='100%'>
+                            <div class='caption'><p>{{ image.train_status }}</p></div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if train %}
+                <div class='row'>
+                    <div class='col-md-4 offset-md-4'>
+                        <a href='{% url "train" employee.id %}'>
+                            <button type='button' class='btn btn-danger btn-block'>Train</button>
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        <div class = 'col-md-3 offset-md-1'>
+            <div class='row auth-form-heading'>
+                <div class=''>
+                    Add Image
+                </div>
+            </div>
+            <div class='row auth-form'
+                <div class=''>
+                    <form method='POST' class='form' enctype='multipart/form-data'>
+                        {% csrf_token %}
+                        {% bootstrap_field form.image show_label=False %}
+                        {% buttons %}
+                            <button type='submit' class='btn btn-dark btn-block col-md-6 offset-md-3'>Submit</button>
+                        {% endbuttons %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'authentication/base.html' %}
+{% load bootstrap4 %}
+{% load fontawesome_5 %}
+{% load static %}
+{% bootstrap_messages %}
+
+
+{% block title %} List Employee {% endblock %}
+
+{% block extra_css %}
+    <link rel='stylesheet' href='{% static "ui/css/list.css" %}'>
+    {% fontawesome_5_static %}
+{% endblock %}
+
+{% block content %}
+    <div class='row'>
+        <div class='col-md-5 offset-md-1 list-heading'>
+            Employee Management
+        </div>
+        <div class='col-md-2 offset-md-3'>
+            <a href='{% url "add_employee" %}'>
+                <button type='btn' class='btn btn-dark'>{% fa5_icon 'plus' %}</button>
+            </a>
+            <a href='{% url "train" 0 %}'>
+                <button type='btn' class='btn btn-dark'>{% fa5_icon 'robot' %}</button>
+            </a>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='table-responsive col-md-10 offset-md-1'>
+            <table class='table table-striped'>
+                <thead>
+                    <tr>
+                        <th scope='col'>Employee ID</th>
+                        <th scope='col'>Name</th>
+                        <th scope='col'>Email</th>
+                        <th scope='col'>Address</th>
+                        <th scope='col'></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for employee in employees %}
+                        <tr>
+                            <td>{{ employee.emp_id }}</td>
+                            <td>{{ employee.name }}</td>
+                            <td>{{ employee.email }}</td>
+                            <td>{{ employee.address }}</td>
+                            <td>
+                                <a href='{% url "employee_image" employee.id %}'>{% fa5_icon 'eye' %}</a>
+                                <a href='{% url "employee_recog_detail" employee.id %}'>{% fa5_icon 'user' %}</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

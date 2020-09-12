@@ -1,0 +1,35 @@
+{% extends 'authentication/base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% bootstrap_messages %}
+
+
+{% block title %} Login {% endblock %}
+
+{% block extra_css %}
+    <link rel='stylesheet' href='{% static "authentication/css/auth_forms.css" %}'>
+{% endblock %}
+
+{% block content %}
+    <div class='row'>
+        <div class = 'col-md-4 offset-md-4'>
+            <div class='row auth-form-heading'>
+                <div class=''>
+                    EMS Login
+                </div>
+            </div>
+            <div class='row auth-form'
+                <div class=''>
+                    <form method='POST' class='form col-md-12'>
+                        {% csrf_token %}
+                        {% bootstrap_field form.username show_label=False %}
+                        {% bootstrap_field form.password show_label=False %}
+                        {% buttons %}
+                            <button type='submit' class='btn btn-dark btn-block col-md-6 offset-md-3'>Open, Sesame</button>
+                        {% endbuttons %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
